@@ -28,7 +28,6 @@ WORKDIR ${DOC_SRC}
 
 VOLUME ["/usr/src/docs"]
 
-ENTRYPOINT ["/bin/bash", "-c", "/opt/rh/rh-ruby22/root/usr/local/bin/asciibinder"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["--help"]
-
