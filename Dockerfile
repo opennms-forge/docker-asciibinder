@@ -9,7 +9,7 @@ RUN yum -y install which git-core && \
     export PATH=$PATH:/usr/local/rvm/rubies/ruby-2.3.3/bin && \
     gem install ascii_binder
 
-WORKSPACE ${DOC_SRC}
+WORKDIR ${DOC_SRC}
 
 VOLUME ["/usr/src/asciibinder"]
 
