@@ -1,18 +1,34 @@
-FROM indigo/centos-jdk8:latest
+FROM centos/ruby-22-centos7
+
 MAINTAINER Ronny Trommer <ronny@opennms.org>
 
-ENV DOC_SRC /usr/src/asciibinder
+ARG OPENJDK_MAJOR_VERSION=1.7.0
+ARG OPENJDK_VERSION=java-${OPENJDK_MAJOR_VERSION}-openjdk-${OPENJDK_MAJOR_VERSION}.95-2.6.4.0.el7_2.x86_64
 
-RUN yum -y install which git-core && \
-    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 && \
-    curl -sSL https://get.rvm.io | bash -s stable --ruby && \
-    export PATH=$PATH:/usr/local/rvm/rubies/ruby-2.3.3/bin && \
-    gem install ascii_binder
+ENV DOC_SRC /usr/src/docs
+
+USER root
+
+RUN scl enable rh-ruby22 -- gem install listen -v 3.0.8 && \
+    scl enable rh-ruby22 -- gem install ascii_binder && \
+    yum install -y java-${OPENJDK_MAJOR_VERSION}-openjdk && \
+    yum clean all
+
+ENV JAVA_HOME=/usr/lib/jvm/${OPENJDK_VERSION}/jre/
+ENV LANG=en_US.UTF-8
+
+LABEL url="http://www.asciibinder.org" \
+      summary="a documentation system built on Asciidoctor" \
+      description="AsciiBinder is for documenting versioned, interrelated projects. Run this container image from the documentation repository, which is mounted into the container. Note: Generated files will be owned by root." \
+      RUN="docker run -it --rm \
+          -v `pwd`:${DOC_SRC}:z \
+          IMAGE"
 
 WORKDIR ${DOC_SRC}
 
-VOLUME ["/usr/src/asciibinder"]
+VOLUME ["/usr/src/docs"]
 
-ENTRYPOINT ["/usr/local/rvm/rubies/ruby-2.3.3/bin/asciibinder"]
+ENTRYPOINT ["/bin/bash", "-c", "/opt/rh/rh-ruby22/root/usr/local/bin/asciibinder"]
 
 CMD ["--help"]
+
