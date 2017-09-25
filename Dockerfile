@@ -1,18 +1,24 @@
 FROM centos/ruby-22-centos7
 
-MAINTAINER Ronny Trommer <ronny@opennms.org>
+LABEL maintainer "Ronny Trommer <ronny@opennms.org>"
 
-ARG OPENJDK_MAJOR_VERSION=1.7.0
-ARG OPENJDK_VERSION=java-${OPENJDK_MAJOR_VERSION}-openjdk-${OPENJDK_MAJOR_VERSION}.95-2.6.4.0.el7_2.x86_64
+ARG JAVA_VERSION=1.8.0
+ARG JAVA_VERSION_DETAIL=1.8.0.144
 
 USER root
 
 RUN scl enable rh-ruby22 -- gem install listen -v 3.0.8 && \
     scl enable rh-ruby22 -- gem install ascii_binder && \
-    yum install -y java-${OPENJDK_MAJOR_VERSION}-openjdk && \
+    yum -y --setopt=tsflags=nodocs update && \
+    yum -y install java-${JAVA_VERSION}-openjdk-devel-${JAVA_VERSION_DETAIL} && \
+    yum -y install epel-release && \
+    yum -y nstall python34 python34-pip && \
+    pip3 install git+https://github.com/smitthakkar96/ascii_binder_search_plugin && \
     yum clean all
 
-ENV JAVA_HOME=/usr/lib/jvm/${OPENJDK_VERSION}/jre/
+# RUN pip install git+https://github.com/smitthakkar96/ascii_binder_search_plugin
+
+ENV JAVA_HOME /usr/lib/jvm/java
 ENV LANG=en_US.UTF-8
 
 LABEL url="http://www.asciibinder.org" \
@@ -21,6 +27,7 @@ LABEL url="http://www.asciibinder.org" \
       RUN="docker run -it --rm \
           -v $(pwd):/usr/src/docs:z \
           IMAGE"
+LABEL org.opennms.java.version="openjdk-${JAVA_VERSION}-{JAVA_VERSION_DETAIL}"
 
 COPY ./docker-entrypoint.sh /
 
@@ -28,6 +35,6 @@ WORKDIR /usr/src/docs
 
 VOLUME ["/usr/src/docs"]
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["--help"]
