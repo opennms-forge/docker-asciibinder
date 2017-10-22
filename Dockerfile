@@ -3,7 +3,7 @@ FROM centos/ruby-22-centos7
 LABEL maintainer "Ronny Trommer <ronny@opennms.org>"
 
 ARG JAVA_VERSION=1.8.0
-ARG JAVA_VERSION_DETAIL=1.8.0.144
+ARG JAVA_VERSION_DETAIL=1.8.0.151
 
 USER root
 
@@ -14,7 +14,8 @@ RUN scl enable rh-ruby22 -- gem install listen -v 3.0.8 && \
     yum -y install epel-release && \
     yum -y nstall python34 python34-pip && \
     pip3 install git+https://github.com/smitthakkar96/ascii_binder_search_plugin && \
-    yum clean all
+    yum clean all && \
+    rm -rf /var/cache/yum
 
 # RUN pip install git+https://github.com/smitthakkar96/ascii_binder_search_plugin
 
