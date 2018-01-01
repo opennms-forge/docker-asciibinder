@@ -6,4 +6,4 @@
 #
 # =====================================================================
 
-/opt/rh/rh-ruby22/root/usr/local/bin/asciibinder ${@}
+/opt/rh/rh-ruby24/root/usr/local/bin/asciibinder ${@}

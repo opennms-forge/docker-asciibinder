@@ -7,8 +7,9 @@ Container based service to build and compile documentation using the [AsciiBinde
 Run the asciibinder binary as container executable and show help and usage.
 
 ```
-docker run --rm -v $(pwd):/usr/src/docs opennms/asciibinder --help
+docker run --rm -v $(pwd):/docs opennms/asciibinder --help
 ```
+
 The following commands can be used:
 
 ```
