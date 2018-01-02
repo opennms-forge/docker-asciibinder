@@ -1,8 +1,22 @@
-# AsciiBinder
+## AsciiBinder Version Tags
 
 Container based service to build and compile documentation using the [AsciiBinder](http://www.asciibinder.org) framework.
 
-# Usage
+* `0.1.14`, `latest`
+* `0.1.13`
+
+## General Project Information
+
+* CI/CD Status: [![CircleCI](https://circleci.com/gh/opennms-forge/docker-asciibinder.svg?style=svg)](https://circleci.com/gh/opennms-forge/docker-asciibinder)
+* Container Image Info: [![](https://images.microbadger.com/badges/version/opennms/asciibinder.svg)](https://microbadger.com/images/opennms/asciibinder "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/opennms/asciibinder.svg)](https://microbadger.com/images/opennms/asciibinder "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/license/opennms/asciibinder.svg)](https://microbadger.com/images/opennms/asciibinder "Get your own license badge on microbadger.com")
+* CI/CD System: [CircleCI]
+* Docker Container Image Repository: [DockerHub]
+* Issue- and Bug-Tracking: [GitHub issue]
+* Source code: [GitHub]
+* Chat: [IRC]
+* Maintainer: ronny@opennms.org
+
+## Usage
 
 Run the asciibinder binary as container executable and show help and usage.
 
@@ -33,3 +47,10 @@ Commands:
 Options:
   -v, --version    Print version and exit
   -h, --help       Show this message
+```
+
+[GitHub]: https://github.com/opennms-forge/docker-asciibinder.git
+[DockerHub]: https://hub.docker.com/r/opennms/asciibinder
+[GitHub issue]: https://github.com/opennms-forge/docker-asciibinder
+[CircleCI]: https://circleci.com/gh/opennms-forge/docker-asciibinder
+[IRC]: irc://freenode.org/#asciibinder
