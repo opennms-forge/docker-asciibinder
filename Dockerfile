@@ -19,9 +19,9 @@ LABEL url="http://www.asciibinder.org" \
       summary="a documentation system built on Asciidoctor" \
       description="AsciiBinder is for documenting versioned, interrelated projects. Run this container image from the documentation repository, which is mounted into the container. Note: Generated files will be owned by root." \
       RUN="docker run -it --rm \
-          -v $(pwd):/usr/src/docs:z \
+          -v $(pwd):/docs:z \
           IMAGE"
-LABEL org.opennms.java.version="openjdk-${JAVA_VERSION}-{JAVA_VERSION_DETAIL}"
+LABEL org.opennms.java.version="openjdk-${JAVA_VERSION}-${JAVA_VERSION_DETAIL}"
 
 COPY ./docker-entrypoint.sh /
 
