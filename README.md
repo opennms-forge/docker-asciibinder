@@ -2,7 +2,8 @@
 
 Container based service to build and compile documentation using the [AsciiBinder](http://www.asciibinder.org) framework.
 
-* `0.1.14`, `latest`
+* `0.1.15`, `latest`
+* `0.1.14`,
 * `0.1.13`
 
 ## General Project Information
