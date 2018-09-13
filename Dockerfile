@@ -1,7 +1,5 @@
 FROM centos/ruby-24-centos7
 
-ARG JAVA_VERSION=1.8.0
-ARG JAVA_VERSION_DETAIL=1.8.0.161
 ARG LANG=en_US.UTF-8
 
 ENV JAVA_HOME=/usr/lib/jvm/${JAVA_VERSION_DETAIL}/jre/
@@ -12,7 +10,7 @@ RUN yum -y --setopt=tsflags=nodocs update && \
     yum -y install libtool && \
     scl enable rh-ruby24 -- gem install listen && \
     scl enable rh-ruby24 -- gem install ascii_binder && \
-    yum -y install java-${JAVA_VERSION}-openjdk-${JAVA_VERSION_DETAIL} && \
+    yum -y install java-1.8.0-openjdk-devel && \
     yum clean all && \
     rm -rf /var/cache/yum
 
@@ -26,10 +24,10 @@ LABEL org.opennms.java.version="openjdk-${JAVA_VERSION}-${JAVA_VERSION_DETAIL}"
 
 COPY ./docker-entrypoint.sh /
 
-WORKDIR /docs
+RUN useradd -m circleci
 
-VOLUME ["/docs"]
+USER circleci
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+WORKDIR /home/circleci
 
-CMD ["--help"]
+VOLUME ["/home/circleci"]
