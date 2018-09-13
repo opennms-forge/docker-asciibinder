@@ -24,10 +24,10 @@ LABEL org.opennms.java.version="openjdk-${JAVA_VERSION}-${JAVA_VERSION_DETAIL}"
 
 COPY ./docker-entrypoint.sh /
 
-RUN useradd -m circleci
+RUN useradd -ms /bin/bash circleci
 
 USER circleci
 
-WORKDIR /home/circleci
+ENV HOME=/home/circleci
 
-VOLUME ["/home/circleci"]
+WORKDIR /home/circleci
