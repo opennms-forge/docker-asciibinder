@@ -7,7 +7,8 @@ ENV JAVA_HOME=/usr/lib/jvm/${JAVA_VERSION_DETAIL}/jre/
 USER root
 
 RUN yum -y --setopt=tsflags=nodocs update && \
-    yum -y install libtool && \
+    yum -y install libtool \
+                   tree && \
     scl enable rh-ruby24 -- gem install listen && \
     scl enable rh-ruby24 -- gem install ascii_binder && \
     yum -y install java-1.8.0-openjdk-devel && \
